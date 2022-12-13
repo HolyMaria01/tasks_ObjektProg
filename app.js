@@ -21,6 +21,40 @@ function deleteTask(e){
     }
 }
 
+function getTask (event){
+    // add task to localStorage
+    let tasks // array user inputs
+    if(localStorage.getItem('tasks') === null){
+        tasks = []
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'))
+    }
+    // loop array for each element value
+    tasks.forEach(function (task){
+        let li = document.createElement('li')
+        li.className = 'collection-item'
+        let liText = document.createTextNode(taskText)
+        li.appendChild(liText)
+
+        const link = document.createElement('a')
+        link.setAttribute('href', '#')
+        link.appendChild(document.createTextNode('X'))
+
+
+        let a = document.createElement('a')
+        a.className = 'teal-text lighten-2 secondary-content'
+        let aText = document.createTextNode('X')
+        a.appendChild(aText)
+        a.setAttribute('href', '#')
+        link.className = 'secondary-content'
+
+        li.appendChild(a)
+
+        const ul = document.querySelector('ul')
+        ul.appendChild(li)
+    })
+}
+
 function addTask(event) {
     // user input
     const taskText = document.querySelector('#task').value
@@ -52,7 +86,7 @@ function addTask(event) {
 
     // add task to localStorage
     let tasks // array user inputs
-    if(localStorage.getItem('tasks') == null){
+    if(localStorage.getItem('tasks') === null){
         tasks = []
     } else {
         tasks = JSON.parse(localStorage.getItem('tasks'))
