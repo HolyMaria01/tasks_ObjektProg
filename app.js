@@ -13,10 +13,29 @@ function clearTasks(){
     }
 }
 
-function deleteTask(e){
-    if(e.target.textContent == 'X'){
+function deleteTask(event){
+    if(event.target.textContent == 'X'){
         if (confirm("Do you want to delete this task?")){
-            e.target.parentElement.remove()
+            event.target.parentElement.remove()
+            // get task value from dom li element testContent
+            let liText = event.target.parentElement.textContent
+            let liTextCorrect = liText.slice(0, liText.length-1)
+            // get data from li
+            let tasks // array user inputs
+            if(localStorage.getItem('tasks') === null){
+                tasks = []
+            } else {
+                tasks = JSON.parse(localStorage.getItem('tasks'))
+            }
+            // loop all tasks elements
+
+            tasks.forEach(function (task, index){
+                // get element with the same value as clicked
+                if (task === liTextCorrect){
+                    tasks.splice(index, 1) // delete this element from data array
+                }
+            })
+            localStorage.setItem('tasks', JSON.stringify(tasks)) // save update data lo LS
         }
     }
 }
