@@ -10,6 +10,7 @@ function clearTasks(){
     //taskList.innerHTML = ''
     while (taskList.firstChild){
         taskList.removeChild(taskList.firstChild)
+        localStorage.removeItem('tasks')
     }
 }
 
@@ -35,7 +36,7 @@ function deleteTask(event){
                     tasks.splice(index, 1) // delete this element from data array
                 }
             })
-            localStorage.setItem('tasks', JSON.stringify(tasks)) // save update data lo LS
+            localStorage.setItem('tasks', JSON.stringify(tasks)) // save update data to LS
         }
     }
 }
